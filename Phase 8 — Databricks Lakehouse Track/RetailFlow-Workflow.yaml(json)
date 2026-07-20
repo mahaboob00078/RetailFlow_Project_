@@ -1,0 +1,14 @@
+resources:
+  pipelines:
+    pipeline_retailflow_dlt:
+      name: RetailFlow-DLT
+      libraries:
+        - glob:
+            include: /Workspace/Users/merimahebooba123@gmail.com/New Pipeline 2026-07-16
+              21:03 (2)/transformations/**
+      schema: silver
+      photon: true
+      catalog: retailflow
+      serverless: true
+      root_path: /Workspace/Users/merimahebooba123@gmail.com/New Pipeline 2026-07-16
+        21:03 (2)

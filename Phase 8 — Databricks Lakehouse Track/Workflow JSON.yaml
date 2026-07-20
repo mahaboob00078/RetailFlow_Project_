@@ -1,0 +1,40 @@
+resources:
+  jobs:
+    RetailFlow_Workflow:
+      name: RetailFlow-Workflow
+      tasks:
+        - task_key: AutoLoader
+          notebook_task:
+            notebook_path: /Workspace/Users/merimahebooba123@gmail.com/02_autoloader.py
+            source: WORKSPACE
+          existing_cluster_id: 0716-103937-hssd8snl
+          max_retries: 2
+          min_retry_interval_millis: 0
+          email_notifications:
+            on_failure:
+              - merimahebooba123@gmail.com
+        - task_key: DTL_Pipeline
+          depends_on:
+            - task_key: AutoLoader
+          pipeline_task:
+            pipeline_id: 44928c41-d436-4683-addd-b48c75ad5ada
+          max_retries: 2
+          min_retry_interval_millis: 0
+          email_notifications:
+            on_failure:
+              - merimahebooba123@gmail.com
+        - task_key: GoldAggretation
+          depends_on:
+            - task_key: DTL_Pipeline
+          notebook_task:
+            notebook_path: /Workspace/Users/merimahebooba123@gmail.com/03_silver_gold
+            source: WORKSPACE
+          existing_cluster_id: 0716-103937-hssd8snl
+          max_retries: 2
+          min_retry_interval_millis: 0
+          email_notifications:
+            on_failure:
+              - merimahebooba123@gmail.com
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
